@@ -1,6 +1,6 @@
 'use strict'
 const api = require('express').Router()
-const { Student, Campus } = require('../db/models')
+const { Student, Campus } = require('../../db/models')
 
 /*
   /api/students - Get all students

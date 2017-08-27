@@ -35,9 +35,9 @@ api.post('/', (req, res, next) => {
         name: req.body.name,
         email: req.body.email
       })
-      newStudent.setCampus(campus, {save: false})
+      newStudent.setCampus(campus, { save: false })
       newStudent.save()
-      .then(student => res.json(student))
+        .then(student => res.json(student))
     })
     .catch(next)
 })

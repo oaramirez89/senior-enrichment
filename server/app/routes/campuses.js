@@ -18,7 +18,7 @@ api.get('/', (req, res, next) => {
 api.get('/:campusId', (req, res, next) => {
   const campusId = req.params.campusId
 
-  Campus.findById(campusId, {include: [{model: Student, as: 'StudentBody'}]})
+  Campus.findById(campusId, { include: [{ model: Student, as: 'StudentBody' }] })
     .then(campus => res.json(campus))
     .catch(next)
 })
@@ -28,8 +28,8 @@ api.get('/:campusId', (req, res, next) => {
 */
 api.post('/', (req, res, next) => {
   Campus.create(req.body)
-  .then(campus => res.json(campus))
-  .catch(next)
+    .then(campus => res.json(campus))
+    .catch(next)
 })
 
 /*
@@ -40,9 +40,9 @@ api.put('/:campusId', (req, res, next) => {
   const campusId = req.params.campusId
 
   Campus.findById(campusId)
-  .then(campus => campus.update(req.body))
-  .then(() => res.status(204).end())
-  .catch(next)
+    .then(campus => campus.update(req.body))
+    .then(() => res.status(204).end())
+    .catch(next)
 })
 
 /*

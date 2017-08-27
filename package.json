@@ -1,7 +1,7 @@
 {
-  "name": "Project Name",
+  "name": "CampusAndStudentManager",
   "version": "0.0.1",
-  "description": "A review time project",
+  "description": "Manages students and campuses for any educational institution.",
   "main": "index.js",
   "scripts": {
     "test": "mocha **/*.test.js *.test.js",

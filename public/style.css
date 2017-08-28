@@ -1,9 +1,11 @@
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 body {
   background: #ECE3E3;
-  padding-bottom: 56px; }
+  padding-bottom: 56px;
+}
 
 #main {
   padding-left: 0; }
@@ -14,4 +16,9 @@ body {
  }
 
 .campus img {
-  height: 300px; }
+  height: 200px;
+}
+
+.bold {
+  font-weight: bold
+}

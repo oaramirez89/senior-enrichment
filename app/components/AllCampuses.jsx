@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 const AllCampuses = (props) => {
 
-  const campuses = props.campuses || [{id: 1, name: 'Fullstack NYC Campus', img: 'LincolnPark.png', StudentBody: []}, {id: 2, name: 'Fullstack Chicago Campus', img: 'LincolnPark.png', StudentBody: []}]
+  const campuses = props.campuses
 
   return (
     <div>
@@ -13,14 +13,14 @@ const AllCampuses = (props) => {
       <div className="row">
         {
           campuses.map(campus => (
-            <div className="col-xs-4" key={ campus.id }>
+            <div className=" campus col-xs-4" key={campus.id}>
               <Link className="thumbnail" to={`/campuses/${campus.id}`}>
-                <img src={ campus.img } />
+                <img src={campus.img} />
                 <div className="caption">
                   <h5>
-                    <span>{ campus.name }</span>
+                    <span>{campus.name}</span>
                   </h5>
-                  <small>{ props.students && props.students.filter(student => student.campusId === campus.id).length } students</small>
+                  <small>{props.students && props.students.filter(student => student.campusId === campus.id).length} students</small>
                 </div>
               </Link>
             </div>

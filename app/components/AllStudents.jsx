@@ -2,37 +2,25 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import Students from './Students'
+
+/*
+  This component obtains all students from
+  the store and passes the data to the students
+  viewer. This makes the students viewer reusable
+  for this case and the single campus use case.
+*/
 const AllStudents = (props) => {
 
-  const students = props.students || [{id: 1, name: 'Oscar', email: 'oscar@gmail.com', campusId: 2}, {id: 2, name: 'Isabel', email: 'isabel@gmail.com', campusId: 1}]
-
   return (
-    <table className='table table-striped table-hover'>
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>E-Mail</th>
-          <th>Campus</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          students && students.map(student => (
-            <tr key={student.id}>
-              <td>{ student.id }</td>
-              <td>{ student.name }</td>
-              <td>{ student.email }</td>
-              <td>{ student.campusId }</td>
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
+    <div>
+      <h3>All Students</h3>
+      <Students students={props.students} />
+    </div>
   )
 }
 
-const mapStateToProps =  (state) => {
+const mapStateToProps = (state) => {
   return {
     students: state.students
   }

@@ -1,9 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default (props) => {
 
-  const campuses = props.campuses || [{id: 1, name: 'Fullstack NYC Campus', img: 'LincolnPark.png', StudentBody: []}, {id: 2, name: 'Fullstack Chicago Campus', img: 'LincolnPark.png', StudentBody: []}];
+const AllCampuses = (props) => {
+
+  const campuses = props.campuses || [{id: 1, name: 'Fullstack NYC Campus', img: 'LincolnPark.png', StudentBody: []}, {id: 2, name: 'Fullstack Chicago Campus', img: 'LincolnPark.png', StudentBody: []}]
 
   return (
     <div>
@@ -18,7 +20,7 @@ export default (props) => {
                   <h5>
                     <span>{ campus.name }</span>
                   </h5>
-                  <small>{ campus.StudentBody.length } students</small>
+                  <small>{ props.students && props.students.filter(student => student.campusId === campus.id).length } students</small>
                 </div>
               </Link>
             </div>
@@ -26,5 +28,16 @@ export default (props) => {
         }
       </div>
     </div>
-  );
-};
+  )
+}
+
+const mapStateToProps = (state) => {
+  return {
+    campuses: state.campuses,
+    students: state.students
+  }
+}
+
+const AllCampusesContainer = withRouter(connect(mapStateToProps)(AllCampuses))
+
+export default AllCampusesContainer

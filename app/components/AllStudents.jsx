@@ -1,9 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-export default (props) => {
+const AllStudents = (props) => {
 
-  const students = props.students || [{id: 1, name: 'Oscar', email: 'oscar@gmail.com', campusId: 2}, {id: 2, name: 'Isabel', email: 'isabel@gmail.com', campusId: 1}];
+  const students = props.students || [{id: 1, name: 'Oscar', email: 'oscar@gmail.com', campusId: 2}, {id: 2, name: 'Isabel', email: 'isabel@gmail.com', campusId: 1}]
 
   return (
     <table className='table table-striped table-hover'>
@@ -28,5 +29,15 @@ export default (props) => {
         }
       </tbody>
     </table>
-  );
+  )
 }
+
+const mapStateToProps =  (state) => {
+  return {
+    students: state.students
+  }
+}
+
+const AllStudentsContainer = withRouter(connect(mapStateToProps)(AllStudents))
+
+export default AllStudentsContainer

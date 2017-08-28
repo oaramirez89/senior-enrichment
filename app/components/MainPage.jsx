@@ -1,5 +1,5 @@
-import React from 'react';
-import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import NavigationBar from './NavigationBar'
 import AllCampuses from './AllCampuses'
 import SingleCampus from './SingleCampus'
@@ -8,12 +8,22 @@ import SingleStudent from './SingleStudent'
 import NewCampus from './NewCampus'
 import NewStudent from './NewStudent'
 
-export default () => {
+import { fetchCampuses } from '../reducers/campuses';
+import { fetchStudents } from '../reducers/students';
+import store from '../store';
 
-  return (
-        <Router>
-        <div>
-          <NavigationBar />
+export default class MainPage extends Component {
+
+  componentDidMount () {
+
+    store.dispatch(fetchCampuses())
+    store.dispatch(fetchStudents())
+  }
+
+  render() {
+    return (
+      <div>
+        <NavigationBar />
         <div id="main" className="container-fluid">
           <div className="col-xs-12">
             <Switch>
@@ -27,7 +37,7 @@ export default () => {
             </Switch>
           </div>
         </div>
-        </div>
-      </Router>
-  )
+      </div>
+    )
+  }
 }

@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  background: #ECE3E3;
+  padding-bottom: 56px; }
+
+#main {
+  padding-left: 0; }
+
+.logo {
+    height: 100px;
+    padding: 15px;
+ }
+
+.campus img {
+  height: 300px; }

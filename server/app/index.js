@@ -16,8 +16,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 /*
   The code below works because `.use` returns `this` which is `app`. So what we want to return in the `module.exports` is `app`, and we can chain on that declaration because each method invokation returns `app` after mutating based on the middleware functions
-
-  OAR 08/26/2017 - Keeping the jokes for invalid URLs. :-)
 */
 module.exports = app
   .use(bodyParser.urlencoded({ extended: true }))

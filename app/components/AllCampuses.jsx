@@ -9,7 +9,10 @@ const AllCampuses = (props) => {
 
   return (
     <div>
+      <div>
       <h3>Campuses</h3>
+      <Link to="/new-campus" className="btn btn-link bold">Add Campus</Link>
+      </div>
       <div className="row">
         {
           campuses.map(campus => (

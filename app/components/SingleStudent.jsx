@@ -14,15 +14,18 @@ const SingleStudent = (props) => {
       <div className="panel-body">
         <span className="bold">Name:   </span>
         <span>{currentStudent.name}</span>
-        <br/>
+        <br />
         <span className="bold">E-Mail:   </span>
         <span>{currentStudent.email}</span>
-        <br/>
+        <br />
         <span className="bold">Campus:   </span>
         <Link to={`/campuses/${currentStudent.campusId}`}>
-        <span>{studentCampus.name}</span>
+          <span>{studentCampus.name}</span>
         </Link>
-        <br/>
+        <br />
+      </div>
+      <div>
+      <Link to="/new-student" className="btn btn-link bold">Edit Student</Link>
       </div>
     </div>
   )

@@ -31,8 +31,8 @@ export default class MainPage extends Component {
               <Route path="/campuses/:campusId" component={SingleCampus} />
               <Route exact path="/students" component={AllStudents} />
               <Route path="/students/:studentId" component={SingleStudent} />
-              <Route path="campuses/new-campus" component={NewCampus} />
-              <Route path="students/new-student" component={NewStudent} />
+              <Route path="/new-campus" component={NewCampus} />
+              <Route path="/new-student" component={NewStudent} />
               <Route component={AllCampuses} />
             </Switch>
           </div>

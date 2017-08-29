@@ -43,6 +43,7 @@ export function postCampus(campus) {
 
 }
 
+// REDUCERS
 export default (state = [], action) => {
   switch (action.type) {
 

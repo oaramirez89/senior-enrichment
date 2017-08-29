@@ -33,6 +33,7 @@ export default class MainPage extends Component {
               <Route path="/students/:studentId" component={SingleStudent} />
               <Route path="/new-campus" component={NewCampus} />
               <Route path="/new-student" component={NewStudent} />
+              <Route path="/edit-student/:studentId" component={NewStudent} />
               <Route component={AllCampuses} />
             </Switch>
           </div>

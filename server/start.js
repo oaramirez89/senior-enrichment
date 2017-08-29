@@ -3,8 +3,11 @@
 /*
   More modularized app startup approach.
   Follows pattern observed in juke workshop app.
-  I like it a bit better than the start file we
-  were provided
+
+  Modularizing the different server startup
+  components will make it easier in the future
+  to switch to other technologies. E.g change
+  from Sequelize to SQL Server.
 
   OAR - 08/25/2017
 */

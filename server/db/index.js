@@ -18,7 +18,7 @@ require('./models')
   Preserved the retry logic provided to us in original
   start module.
 */
-const syncedDbPromise = db.sync({force: false})
+const syncedDbPromise = db.sync({ force: false })
 
 syncedDbPromise.then(ok => console.log('Synced models to db.'))
   .catch(fail => {

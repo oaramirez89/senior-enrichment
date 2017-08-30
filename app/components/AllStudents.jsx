@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Students from './Students'
@@ -15,6 +15,7 @@ const AllStudents = (props) => {
   return (
     <div>
       <h3>All Students</h3>
+      <Link to="/new-student" className="btn btn-link bold">Add Student</Link>
       <Students students={props.students} />
     </div>
   )

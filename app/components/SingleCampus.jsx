@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 import Students from './Students'
@@ -18,9 +18,13 @@ const SingleCampus = (props) => {
   return (
     <div className="campus">
       <div>
-        <h3>{currentCampus.name}</h3>
-        <img src={currentCampus.img}/>
+        <div>
+          <h3>{currentCampus.name}</h3>
+          <Link to={`/edit-campus/${currentCampus.id}`} className="btn btn-link bold">Edit Campus Details</Link>
+        </div>
+        <img src={currentCampus.img} />
       </div>
+      <Link to={`/add-student-to-campus/${currentCampus.id}`} className="btn btn-link bold">Add Student To {currentCampus.name} </Link>
       <Students students={studentBody} />
     </div>
   )

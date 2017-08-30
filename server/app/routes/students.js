@@ -27,6 +27,8 @@ api.get('/:studentId', (req, res, next) => {
   /api/students - Add a new student and
   associate them to a campus. Student is
   required to belong to a campus per specs.
+  Association is enforced by the DB associations
+  declarations in the model.
 */
 api.post('/', (req, res, next) => {
   Campus.findById(req.body.campusId)

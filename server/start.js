@@ -46,9 +46,9 @@ const startServer = function () {
 startDb
 .then(createApplication)
 .then(() => {
-  if (module === require.main) {
-    startServer()
-  }
+    if (module === require.main) {
+        startServer()
+    }
 })
 .catch(function (err) {
     console.error(chalk.red(err.stack))

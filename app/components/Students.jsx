@@ -7,7 +7,6 @@ export default (props) => {
 
   return (
     <div>
-      <Link to="/new-student" className="btn btn-link bold">Add Student</Link>
       <table className='table table-striped table-hover'>
         <thead>
           <tr>

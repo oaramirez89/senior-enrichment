@@ -14,7 +14,7 @@ import store from '../store';
 
 export default class MainPage extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
 
     store.dispatch(fetchCampuses())
     store.dispatch(fetchStudents())
@@ -32,6 +32,8 @@ export default class MainPage extends Component {
               <Route exact path="/students" component={AllStudents} />
               <Route path="/students/:studentId" component={SingleStudent} />
               <Route path="/new-campus" component={NewCampus} />
+              <Route path="/edit-campus/:campusId" component={NewCampus} />
+              <Route path="/add-student-to-campus/:campusId" component={NewStudent} />
               <Route path="/new-student" component={NewStudent} />
               <Route path="/edit-student/:studentId" component={NewStudent} />
               <Route component={AllCampuses} />

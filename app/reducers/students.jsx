@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_STUDENTS = 'GET_STUDENTS';
 const GET_STUDENT = 'GET_STUDENT';
 const UPDATE_STUDENT = 'UPDATE_STUDENT'
+const DELETE_STUDENT = 'DELETE_STUDENT'
 
 // ACTION CREATORS
 export function getStudents(students) {
@@ -18,6 +19,11 @@ export function getStudent(student) {
 
 export function updateStudent(student) {
   const action = { type: UPDATE_STUDENT, student };
+  return action;
+}
+
+export function deleteStudent(studentId) {
+  const action = { type: DELETE_STUDENT, studentId };
   return action;
 }
 
@@ -51,6 +57,16 @@ export function putStudent(student) {
   }
 }
 
+export function removeStudent(studentId) {
+  return function thunk(dispatch) {
+    return axios.delete(`/api/students/${studentId}`)
+      .then(() => dispatch(deleteStudent(studentId)))
+      .catch(error => {
+        console.log(error);
+      })
+  }
+}
+
 export default (state = [], action) => {
   switch (action.type) {
 
@@ -65,6 +81,10 @@ export default (state = [], action) => {
       // added most recent version.
       let newState = state.filter(student => student.id != action.student.id)
       return [...newState, action.student]
+
+      case DELETE_STUDENT:
+      // removed deleted student from state
+      return state.filter(student => student.id != action.studentId)
 
     default:
       return state;

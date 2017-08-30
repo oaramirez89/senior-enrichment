@@ -1,9 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { removeStudent } from '../reducers/students'
 
-export default (props) => {
+const Students = (props) => {
 
   const students = props.students
+
+  const handleDeleteClick = (studentId, event) => {
+    event.preventDefault();
+    props.removeStudent(studentId)
+  }
 
   return (
     <div>
@@ -18,11 +25,19 @@ export default (props) => {
         <tbody>
           {
             students && students.map(student => (
-
-              <tr key={student.id}>
+              <tr key={student.id} >
                 <Link to={`/students/${student.id}`} >{student.id}</Link>
                 <td>{student.name}</td>
                 <td>{student.email}</td>
+                <td>
+                  <button
+                    onClick={handleDeleteClick.bind(event, student.id)}
+                    type="button"
+                    className="close rounded"
+                    aria-label="Close" >
+                    <span value={student.id} aria-hidden="true">&times;</span>
+                  </button>
+                </td>
               </tr>
             ))
           }
@@ -31,3 +46,14 @@ export default (props) => {
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = { removeStudent }
+
+const StudentsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Students))
+
+export default StudentsContainer

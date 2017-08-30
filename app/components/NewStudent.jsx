@@ -62,6 +62,7 @@ class NewStudent extends Component {
     } else {
       this.props.putStudent(this.state)
     }
+
     // go back to where you were prompted.
     this.props.history.go(-1)
   }

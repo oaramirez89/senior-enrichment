@@ -5863,8 +5863,8 @@ button.list-group-item-danger.active:focus {
 button.close {
   padding: 0;
   cursor: pointer;
-  background: transparent;
-  border: 0;
+  background: red;
+  border: black;
   -webkit-appearance: none;
 }
 .modal-open {

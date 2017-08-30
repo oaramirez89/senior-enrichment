@@ -22,3 +22,7 @@ body {
 .bold {
   font-weight: bold
 }
+
+.rounded {
+  border-radius: 6px
+}

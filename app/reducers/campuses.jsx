@@ -4,6 +4,7 @@ import axios from 'axios';
 const GET_CAMPUSES = 'GET_CAMPUSES';
 const GET_CAMPUS = 'GET_CAMPUS';
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS'
+const DELETE_CAMPUS = 'DELETE_CAMPUS'
 
 // ACTION CREATORS
 export function getCampuses(campuses) {
@@ -18,6 +19,11 @@ export function getCampus(campus) {
 
 export function updateCampus(campus) {
   const action = { type: UPDATE_CAMPUS, campus }
+  return action
+}
+
+export function deleteCampus(campusId) {
+  const action = { type: DELETE_CAMPUS, campusId }
   return action
 }
 
@@ -57,6 +63,16 @@ export function putCampus(campus) {
   }
 }
 
+export function removeCampus(campusId) {
+  return function thunk(dispatch) {
+    return axios.delete(`/api/campuses/${campusId}`)
+      .then(() => dispatch(deleteCampus(campusId)))
+      .catch(error => {
+        console.log(error);
+      })
+  }
+}
+
 // REDUCERS
 export default (state = [], action) => {
   switch (action.type) {
@@ -71,6 +87,9 @@ export default (state = [], action) => {
       // replace old version with most recent version.
       let newState = state.filter(campus => campus.id != action.campus.id)
       return [...newState, action.campus]
+
+    case DELETE_CAMPUS:
+      return state.filter(campus => campus.id != action.campusId)
 
     default:
       return state;

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import { removeCampus } from '../reducers/campuses'
 import Students from './Students'
 
 const SingleCampus = (props) => {
@@ -15,11 +16,28 @@ const SingleCampus = (props) => {
   const currentCampus = props.campuses.find(campus => campus.id === campusId)
   const studentBody = props.students.filter(student => student.campusId === campusId)
 
+  const handleDeleteClick = (event) => {
+    event.preventDefault();
+    if (studentBody.length > 0) {
+      alert("Cannot remove a campus if students are enrolled. Transfer students out of campus first.")
+    } else {
+      props.removeCampus(currentCampus.id)
+      props.history.go(-1)
+    }
+  }
+
   return (
     <div className="campus">
       <div>
         <div>
           <h3>{currentCampus.name}</h3>
+          <button
+            onClick={handleDeleteClick}
+            type="button"
+            className="close rounded"
+            aria-label="Close">
+            <span aria-hidden="true">Remove Campus;</span>
+          </button>
           <Link to={`/edit-campus/${currentCampus.id}`} className="btn btn-link bold">Edit Campus Details</Link>
         </div>
         <img src={currentCampus.img} />
@@ -37,6 +55,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const SingleCampusContainer = withRouter(connect(mapStateToProps)(SingleCampus))
+const mapDispatchToProps = { removeCampus }
+
+const SingleCampusContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(SingleCampus))
 
 export default SingleCampusContainer

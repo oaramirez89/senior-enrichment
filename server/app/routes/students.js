@@ -62,7 +62,6 @@ api.put('/:studentId', (req, res, next) => {
 */
 api.delete('/:studentId', (req, res, next) => {
   const studentId = +req.params.studentId
-  console.log('student id in delete: ', studentId)
   Student.destroy({ where: { id: studentId } })
     .then(() => res.status(204).end())
     .catch(next)

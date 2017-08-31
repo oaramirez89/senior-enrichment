@@ -35,7 +35,7 @@ const Students = (props) => {
                     type="button"
                     className="close rounded"
                     aria-label="Close" >
-                    <span value={student.id} aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                   </button>
                 </td>
               </tr>
@@ -47,13 +47,8 @@ const Students = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-  }
-}
-
 const mapDispatchToProps = { removeStudent }
 
-const StudentsContainer = withRouter(connect(mapStateToProps, mapDispatchToProps)(Students))
+const StudentsContainer = withRouter(connect(null, mapDispatchToProps)(Students))
 
 export default StudentsContainer

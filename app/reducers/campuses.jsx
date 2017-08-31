@@ -1,19 +1,20 @@
-import axios from 'axios';
+import axios from 'axios'
+import socket from '../socket'
 
 // ACTION TYPES
-const GET_CAMPUSES = 'GET_CAMPUSES';
-const GET_CAMPUS = 'GET_CAMPUS';
+const GET_CAMPUSES = 'GET_CAMPUSES'
+const GET_CAMPUS = 'GET_CAMPUS'
 const UPDATE_CAMPUS = 'UPDATE_CAMPUS'
 const DELETE_CAMPUS = 'DELETE_CAMPUS'
 
 // ACTION CREATORS
 export function getCampuses(campuses) {
-  const action = { type: GET_CAMPUSES, campuses };
+  const action = { type: GET_CAMPUSES, campuses }
   return action
 }
 
 export function getCampus(campus) {
-  const action = { type: GET_CAMPUS, campus };
+  const action = { type: GET_CAMPUS, campus }
   return action
 }
 
@@ -42,6 +43,7 @@ export function postCampus(campus) {
       .then(res => res.data)
       .then(newCampus => {
         dispatch(getCampus(newCampus))
+        socket.emit('new-campus', newCampus);
       })
       .catch(error => error) // returns the error to the form
   }
@@ -52,6 +54,7 @@ export function putCampus(campus) {
     return axios.put(`/api/campuses/${campus.id}`, campus)
       .then(() => {
         dispatch(updateCampus(campus))
+        socket.emit('update-campus', campus);
       })
       .catch(error => error) //returns the error to the form
   }
@@ -62,6 +65,7 @@ export function removeCampus(campusId) {
     return axios.delete(`/api/campuses/${campusId}`)
       .then(() => {
         dispatch(deleteCampus(campusId))
+        socket.emit('delete-campus', campusId);
       })
       .catch(error => error) //returns the error to the form
   }

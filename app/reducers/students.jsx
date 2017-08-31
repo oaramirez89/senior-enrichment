@@ -1,4 +1,5 @@
 import axios from 'axios';
+import socket from '../socket'
 
 // ACTION TYPES
 const GET_STUDENTS = 'GET_STUDENTS';
@@ -42,6 +43,7 @@ export function postStudent(student) {
       .then(res => res.data)
       .then(newStudent => {
         dispatch(getStudent(newStudent))
+        socket.emit('new-student', newStudent);
       })
       .catch(error => error) // returns the error to the form
   }
@@ -52,6 +54,7 @@ export function putStudent(student) {
     return axios.put(`/api/students/${student.id}`, student)
       .then(() => {
         dispatch(updateStudent(student))
+        socket.emit('update-student', student);
       })
       .catch(error => error) // returns the error to the form
   }
@@ -62,6 +65,7 @@ export function removeStudent(studentId) {
     return axios.delete(`/api/students/${studentId}`)
       .then(() => {
         dispatch(deleteStudent(studentId))
+        socket.emit('delete-student', studentId);
       })
       .catch(error => error) // returns the error to the form
   }

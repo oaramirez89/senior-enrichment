@@ -38,19 +38,25 @@ const startServer = function () {
         console.log(chalk.blue('Server started on port', chalk.magenta(PORT)))
     })
 
+    /*
+        Set up sockect connectivity.
+    */
+    const io = require('socket.io')(server);
+    require('./socket')(io);
+
 }
 
 /*
     Execute application startup sequence.
 */
 startDb
-.then(createApplication)
-.then(() => {
-    if (module === require.main) {
-        startServer()
-    }
-})
-.catch(function (err) {
-    console.error(chalk.red(err.stack))
-    process.exit(1)
-})
+    .then(createApplication)
+    .then(() => {
+        if (module === require.main) {
+            startServer()
+        }
+    })
+    .catch(function (err) {
+        console.error(chalk.red(err.stack))
+        process.exit(1)
+    })

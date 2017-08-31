@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { removeCampus } from '../reducers/campuses'
 import Students from './Students'
 
+const BACK_PAGE = -1
+
 const SingleCampus = (props) => {
   /* Force param to be a numeric value. */
   const campusId = Number(props.match.params.campusId)
@@ -16,13 +18,17 @@ const SingleCampus = (props) => {
   const currentCampus = props.campuses.find(campus => campus.id === campusId)
   const studentBody = props.students.filter(student => student.campusId === campusId)
 
+  /*
+    Only allow removal of campus if no
+    students are enrolled.
+  */
   const handleDeleteClick = (event) => {
     event.preventDefault();
     if (studentBody.length > 0) {
       alert("Cannot remove a campus if students are enrolled. Transfer students out of campus first.")
     } else {
       props.removeCampus(currentCampus.id)
-      props.history.go(-1)
+      props.history.go(BACK_PAGE)
     }
   }
 

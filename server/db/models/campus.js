@@ -5,7 +5,7 @@ const db = require('../db')
 
 module.exports = db.define('campus', {
   name: Sequelize.STRING,
-  img: Sequelize.STRING
+  img: Sequelize.TEXT
 }, {
     indexes: [
       // Create a unique index on campus name

@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 const SingleStudent = (props) => {
   /* Force param to be a numeric value. */
   const studentId = Number(props.match.params.studentId)
-  console.log('studentId: ', studentId)
   const currentStudent = props.students.find(student => student.id === studentId)
   const studentCampus = props.campuses.find(campus => campus.id === currentStudent.campusId)
 

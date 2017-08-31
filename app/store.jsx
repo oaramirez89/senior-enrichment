@@ -5,6 +5,4 @@ import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-t
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, createLogger()))
 
-console.log('Initial state: ', store.getState())
-
 export default store

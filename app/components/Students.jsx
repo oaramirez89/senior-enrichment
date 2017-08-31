@@ -26,7 +26,7 @@ const Students = (props) => {
           {
             students && students.map(student => (
               <tr key={student.id} >
-                <Link to={`/students/${student.id}`} >{student.id}</Link>
+                <td><Link to={`/students/${student.id}`} >{student.id}</Link></td>
                 <td>{student.name}</td>
                 <td>{student.email}</td>
                 <td>

@@ -4,19 +4,28 @@ import { connect } from 'react-redux'
 import { putStudent, postStudent } from '../reducers/students'
 
 /*
+  Use constants to make use of magic
+  numbers clearer in your code.
+*/
+const CAMPUS_NOT_ASSIGNED = -1
+const NEW_STUDENT = 0
+const BACK_PAGE = -1
+
+/*
   Forms keep local state while user is
   working on its edits, and sends data to
   the store once they submit.
 */
 class NewStudent extends Component {
+
   constructor(props) {
     super(props)
 
     this.state = {
-      id: 0,
+      id: NEW_STUDENT,
       name: '',
       email: '',
-      campusId: -1
+      campusId: CAMPUS_NOT_ASSIGNED
     }
 
     this.handleNameChange = this.handleNameChange.bind(this)
@@ -28,7 +37,7 @@ class NewStudent extends Component {
   }
 
   handleCancel(event) {
-    this.props.history.go(-1)
+    this.props.history.go(BACK_PAGE)
   }
 
   handleNameChange(event) {
@@ -57,14 +66,14 @@ class NewStudent extends Component {
   handleSubmit(event) {
     event.preventDefault()
 
-    if (this.state.id === 0) {
+    if (this.state.id === NEW_STUDENT) {
       this.props.postStudent(this.state)
     } else {
       this.props.putStudent(this.state)
     }
 
     // go back to where you were prompted.
-    this.props.history.go(-1)
+    this.props.history.go(BACK_PAGE)
   }
 
   componentWillMount() {

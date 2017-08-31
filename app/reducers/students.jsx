@@ -40,30 +40,30 @@ export function postStudent(student) {
   return function thunk(dispatch) {
     return axios.post('/api/students', student)
       .then(res => res.data)
-      .then(newStudent => dispatch(getStudent(newStudent)))
-      .catch(error => {
-        console.log(error)
+      .then(newStudent => {
+        dispatch(getStudent(newStudent))
       })
+      .catch(error => error) // returns the error to the form
   }
 }
 
 export function putStudent(student) {
   return function thunk(dispatch) {
     return axios.put(`/api/students/${student.id}`, student)
-      .then(() => dispatch(updateStudent(student)))
-      .catch(error => {
-        console.log(error);
+      .then(() => {
+        dispatch(updateStudent(student))
       })
+      .catch(error => error) // returns the error to the form
   }
 }
 
 export function removeStudent(studentId) {
   return function thunk(dispatch) {
     return axios.delete(`/api/students/${studentId}`)
-      .then(() => dispatch(deleteStudent(studentId)))
-      .catch(error => {
-        console.log(error);
+      .then(() => {
+        dispatch(deleteStudent(studentId))
       })
+      .catch(error => error) // returns the error to the form
   }
 }
 

@@ -11,6 +11,12 @@ const NEW_CAMPUS = 0
 const BACK_PAGE = -1
 
 /*
+  Error messages
+*/
+const POST_DUPE_ERROR = 'Trying to add a campus with a name that already exists in the DB'
+const PUT_DUPE_ERROR = 'Trying to edit a campus with a name that already exists in the DB'
+
+/*
   Forms keep local state while user is
   working on its edits, and sends data to
   the store once they submit.
@@ -22,7 +28,8 @@ class NewCampus extends Component {
     this.state = {
       id: NEW_CAMPUS,
       name: '',
-      img: ''
+      img: '',
+      error: ''
     }
 
     this.handleNameChange = this.handleNameChange.bind(this)
@@ -37,13 +44,15 @@ class NewCampus extends Component {
 
   handleNameChange(event) {
     this.setState({
-      name: event.target.value
+      name: event.target.value,
+      error: ''
     })
   }
 
   handleImgChange(event) {
     this.setState({
-      img: event.target.value
+      img: event.target.value,
+      error: ''
     })
   }
 
@@ -51,17 +60,44 @@ class NewCampus extends Component {
     If form is used to Add the campus id
     will be 0. Using this field to determine
     if we send a post or a put to the server.
+
+    Added logic to show errors to user for better
+    user feedback.
   */
   handleSubmit(event) {
     event.preventDefault()
 
     if (this.state.id === NEW_CAMPUS) {
-      this.props.postCampus(this.state)
+      this.props.postCampus({
+        id: this.state.id,
+        name: this.state.name,
+        img: this.state.img
+      })
+        .then(error => {
+          if (error) {
+            this.setState({
+              error: POST_DUPE_ERROR
+            })
+          } else {
+            this.props.history.go(BACK_PAGE)
+          }
+        })
     } else {
-      this.props.putCampus(this.state)
+      this.props.putCampus({
+        id: this.state.id,
+        name: this.state.name,
+        img: this.state.img
+      })
+        .then(error => {
+          if (error) {
+            this.setState({
+              error: PUT_DUPE_ERROR
+            })
+          } else {
+            this.props.history.go(BACK_PAGE)
+          }
+        })
     }
-    // go back to where you were prompted.
-    this.props.history.go(-1)
   }
 
   componentWillMount() {
@@ -117,6 +153,12 @@ class NewCampus extends Component {
               <button type="submit" className="btn btn-primary">Submit</button>
             </div>
           </div>
+          {
+            this.state.error.length > 0 &&
+            <div className="alert alert-danger">
+              <strong>Validation Error: </strong> {this.state.error}
+            </div>
+          }
         </fieldset>
       </form>
     )

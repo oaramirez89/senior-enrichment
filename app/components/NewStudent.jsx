@@ -12,6 +12,14 @@ const NEW_STUDENT = 0
 const BACK_PAGE = -1
 
 /*
+  Error messages
+*/
+const POST_DUPE_ERROR = 'Trying to add a student with an email that already exists in the DB'
+const PUT_DUPE_ERROR = 'Trying to enter an email that already exists in the DB'
+const NO_CAMPUS_ERROR = 'A student must be assigned to a campus. Please select a campus.'
+
+
+/*
   Forms keep local state while user is
   working on its edits, and sends data to
   the store once they submit.
@@ -25,7 +33,8 @@ class NewStudent extends Component {
       id: NEW_STUDENT,
       name: '',
       email: '',
-      campusId: CAMPUS_NOT_ASSIGNED
+      campusId: CAMPUS_NOT_ASSIGNED,
+      error: ''
     }
 
     this.handleNameChange = this.handleNameChange.bind(this)
@@ -42,19 +51,22 @@ class NewStudent extends Component {
 
   handleNameChange(event) {
     this.setState({
-      name: event.target.value
+      name: event.target.value,
+      error: ''
     })
   }
 
   handleEmailChange(event) {
     this.setState({
-      email: event.target.value
+      email: event.target.value,
+      error: ''
     })
   }
 
   handleCampusChange(event) {
     this.setState({
-      campusId: event.target.value
+      campusId: event.target.value,
+      error: ''
     })
   }
 
@@ -62,18 +74,54 @@ class NewStudent extends Component {
     If form is used to Add the student id
     will be 0. Using this field to determine
     if we send a post or a put to the server.
+
+    Added logic to show errors to user for better
+    user feedback.
   */
   handleSubmit(event) {
     event.preventDefault()
 
-    if (this.state.id === NEW_STUDENT) {
-      this.props.postStudent(this.state)
-    } else {
-      this.props.putStudent(this.state)
+    if (this.state.campusId === CAMPUS_NOT_ASSIGNED) {
+      this.setState({
+        error: NO_CAMPUS_ERROR
+      })
+      // no campus, no need to go further.
+      return
     }
 
-    // go back to where you were prompted.
-    this.props.history.go(BACK_PAGE)
+    if (this.state.id === NEW_STUDENT) {
+      this.props.postStudent({
+        id: this.state.id,
+        name: this.state.name,
+        email: this.state.email,
+        campusId: this.state.campusId
+      })
+        .then((error) => {
+          if (error) {
+            this.setState({
+              error: POST_DUPE_ERROR
+            })
+          } else {
+            this.props.history.go(BACK_PAGE)
+          }
+        })
+    } else {
+      this.props.putStudent({
+        id: this.state.id,
+        name: this.state.name,
+        email: this.state.email,
+        campusId: this.state.campusId
+      })
+        .then(error => {
+          if (error) {
+            this.setState({
+              error: PUT_DUPE_ERROR
+            })
+          } else {
+            this.props.history.go(BACK_PAGE)
+          }
+        })
+    }
   }
 
   componentWillMount() {
@@ -163,6 +211,12 @@ class NewStudent extends Component {
               <button type="submit" className="btn btn-primary">Submit</button>
             </div>
           </div>
+          {
+            this.state.error.length > 0 &&
+            <div className="alert alert-danger">
+              <strong>Validation Error: </strong> {this.state.error}
+            </div>
+          }
         </fieldset>
       </form>
     )

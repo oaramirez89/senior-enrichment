@@ -32,10 +32,7 @@ export function fetchCampuses() {
   return function thunk(dispatch) {
     return axios.get('/api/campuses')
       .then(res => res.data)
-      .then(campuses => {
-        const action = getCampuses(campuses);
-        dispatch(action);
-      });
+      .then(campuses => dispatch(getCampuses(campuses)))
   }
 }
 
@@ -44,32 +41,29 @@ export function postCampus(campus) {
     return axios.post('/api/campuses', campus)
       .then(res => res.data)
       .then(newCampus => {
-        const action = getCampus(newCampus);
-        dispatch(action);
+        dispatch(getCampus(newCampus))
       })
-      .catch(error => {
-        console.log(error);
-      })
+      .catch(error => error) // returns the error to the form
   }
 }
 
 export function putCampus(campus) {
   return function thunk(dispatch) {
     return axios.put(`/api/campuses/${campus.id}`, campus)
-      .then(() => dispatch(updateCampus(campus)))
-      .catch(error => {
-        console.log(error);
+      .then(() => {
+        dispatch(updateCampus(campus))
       })
+      .catch(error => error) //returns the error to the form
   }
 }
 
 export function removeCampus(campusId) {
   return function thunk(dispatch) {
     return axios.delete(`/api/campuses/${campusId}`)
-      .then(() => dispatch(deleteCampus(campusId)))
-      .catch(error => {
-        console.log(error);
+      .then(() => {
+        dispatch(deleteCampus(campusId))
       })
+      .catch(error => error) //returns the error to the form
   }
 }
 

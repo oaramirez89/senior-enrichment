@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import NavigationBar from './NavigationBar'
 import AllCampuses from './AllCampuses'
 import SingleCampus from './SingleCampus'

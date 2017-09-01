@@ -25,7 +25,7 @@ const SingleStudent = (props) => {
         <br />
       </div>
       <div>
-      <Link to={`/edit-student/${currentStudent.id}`} className="btn btn-link bold">Edit Student</Link>
+        <Link to={`/edit-student/${currentStudent.id}`} className="btn btn-link bold">Edit Student</Link>
       </div>
     </div>
   )

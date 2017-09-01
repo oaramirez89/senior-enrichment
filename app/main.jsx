@@ -7,6 +7,9 @@ import { HashRouter as Router } from 'react-router-dom';
 import store from './store'
 import MainPage from './components/MainPage'
 
+/*
+  React main entry point.
+*/
 render(
   <Provider store={store}>
     <Router>

@@ -5,7 +5,7 @@
   own initiation and configuration modules.
 */
 const bodyParser = require('body-parser')
-const {resolve} = require('path')
+const { resolve } = require('path')
 const express = require('express')
 const app = express()
 

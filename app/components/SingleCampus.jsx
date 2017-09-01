@@ -20,7 +20,13 @@ const SingleCampus = (props) => {
 
   /*
     Only allow removal of campus if no
-    students are enrolled.
+    students are enrolled. This was a UI decision to
+    help admins not accidentally remove an entire student
+    body. If you remove the alert, the campus will be
+    removed and all students will be deleted as
+    the DB model has a CASCADE DELETE setup.
+
+    OAR 08/31/2017
   */
   const handleDeleteClick = (event) => {
     event.preventDefault();

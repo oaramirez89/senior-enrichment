@@ -1,3 +1,11 @@
+/*
+  Receives changes made by clients and transmits them
+  to any other clients that may be using the application.
+
+  The changes are sent to this server by the campus
+  and student store thunks.
+*/
+
 module.exports = io => {
 
   io.on('connection', socket => {

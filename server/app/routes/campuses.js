@@ -1,5 +1,7 @@
 'use strict'
+
 const api = require('express').Router()
+
 const { Campus, Student } = require('../../db/models')
 
 /*

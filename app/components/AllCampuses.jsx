@@ -2,7 +2,6 @@ import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-
 const AllCampuses = (props) => {
 
   const campuses = props.campuses
@@ -10,8 +9,8 @@ const AllCampuses = (props) => {
   return (
     <div>
       <div>
-      <h3>Campuses</h3>
-      <Link to="/new-campus" className="btn btn-link bold">Add Campus</Link>
+        <h3>Campuses</h3>
+        <Link to="/new-campus" className="btn btn-link bold">Add Campus</Link>
       </div>
       <div className="row">
         {

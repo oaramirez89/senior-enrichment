@@ -1,8 +1,12 @@
 import io from 'socket.io-client'
+
 import { getCampus, updateCampus, deleteCampus } from './reducers/campuses'
 import { getStudent, updateStudent, deleteStudent } from './reducers/students'
 import store from './store'
 
+/*
+  Receive application changes from other clients.
+*/
 const socket = io(window.location.origin);
 
 socket.on('connect', () => {

@@ -71,6 +71,7 @@ export function removeStudent(studentId) {
   }
 }
 
+// REDUCER
 export default (state = [], action) => {
   switch (action.type) {
 

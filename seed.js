@@ -32,6 +32,7 @@ const main = () => {
     })
     .then(() => {
       db.close()
+      console.log('Seeding completed...')
       return null
     })
 }

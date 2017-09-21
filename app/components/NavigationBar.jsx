@@ -4,20 +4,20 @@ import { Link } from 'react-router-dom';
 export default () => {
 
   return (
-    <div className="row">
-      <div className="col-lg-2 col-md-2 col-sm-3">
-        <img src="university-building.svg" className="logo" />
-      </div>
-      <div className="col-lg-10 col-md-10 col-sm-9">
-        <ul className="nav nav-pills">
-          <li>
-            <Link to="/campuses" >Campuses</Link>
-          </li>
-          <li>
-            <Link to="/students" >Students</Link>
-          </li>
-        </ul>
-      </div>
+    <div>
+      <nav className="navbar navbar-default">
+        <div className="navbar-header">
+          <img src="university-building.svg" className="logo" />
+          <Link className="navbar-brand" to="/"></Link>
+        </div>
+
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul className="nav navbar-nav">
+            <li><Link to="/campuses">Campuses</Link></li>
+            <li><Link to="/students">Students</Link></li>
+          </ul>
+        </div>
+      </nav>
     </div>
   );
 }

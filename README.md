@@ -1,6 +1,7 @@
 # Senior Enrichment Project
 
 Make a thing!
+Testing the pull API
 
 ## Getting started
 

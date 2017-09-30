@@ -1,5 +1,5 @@
 {
-  "name": "CampusAndStudentManager",
+  "name": "campus-student-manager",
   "version": "0.0.1",
   "description": "Manages students and campuses for any educational institution.",
   "main": "index.js",
